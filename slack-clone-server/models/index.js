@@ -5,7 +5,7 @@ const sequelize = new Sequelize('myslack', 'postgres', 'postgres', {
   dialect: 'postgres',
   define:{
     underscored: true    // conver camel case columns to snake case
-  }
+  } 
 });
 
 const models = {
