@@ -12,15 +12,14 @@ export default (sequelize, DataTypes) => {
                 field: 'team_id'
             }
         });
+        // N to M
+        Channel.belongsToMany(models.User, {
+            through: 'channel_number',
+            foreignKey: {
+                name: 'channelId',
+                field: 'channel_id'
+            }
+        });
     };
-    // N to M
-    Channel.belongsToMany(models.User,{
-        though: 'channel_number',
-        foreignKey:{
-            name: 'channelId',
-            field: 'channel_id'
-        }
-    })
-
     return Channel;
 }

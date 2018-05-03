@@ -26,7 +26,4 @@ export default `
         email: String!
         teams: [Team!]!
     }
-    type Query{
-        hi: String
-    }
-`;
+`

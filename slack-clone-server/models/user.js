@@ -21,7 +21,7 @@ export default (sequelize, DataTypes) => {
         });
         // N to M
         User.belongsToMany(models.Channel,{
-            though: 'channel_number',
+            through: 'channel_number',
             foreignKey:{
                 name: 'userId',
                 field: 'user_id'
