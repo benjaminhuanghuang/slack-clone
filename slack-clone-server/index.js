@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { graphqlExpress, graphiqlExpress} from 'apollo-server-express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
@@ -14,11 +14,14 @@ const schema = makeExecutableSchema({
 })
 
 const PORT = 3838;
-const GraphqlEndpoint='/graphql';
+const GraphqlEndpoint = '/graphql';
 
 const app = express();
-app.use(GraphqlEndpoint, bodyParser.json(), graphqlExpress({schema}));
-app.use('/graphiql', graphiqlExpress({ endpointURL: GraphqlEndpoint}));
+app.use(GraphqlEndpoint, bodyParser.json(), graphqlExpress({ schema }));
+app.use('/graphiql', graphiqlExpress({ endpointURL: GraphqlEndpoint }));
 
-app.listen(PORT);
+models.sequelize.sync({force: true}).then(() => {
+    app.listen(PORT);
+});
+
 

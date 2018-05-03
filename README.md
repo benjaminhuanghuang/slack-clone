@@ -27,3 +27,5 @@ postgres -D /usr/local/var/postgres
 psql
 create database myslack;
 \q
+\c myslack   # connect to database
+\d           # show all tables
