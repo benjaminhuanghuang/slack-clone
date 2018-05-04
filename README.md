@@ -18,7 +18,7 @@ npm i -g eslint
 eslint --init
 ```
 
-Database and ORM
+## Database and ORM
 ```
 npm i -S sequelize
 ```
