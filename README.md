@@ -35,3 +35,16 @@ Tool for merge schema
 ```
     npm i -S merge-graphql-schemas
 ```
+
+## React with GraphQL
+```
+npm i -g create-react-app
+create-react-app slack-clone-client
+
+# installing the preset package and react integration
+npm install apollo-boost react-apollo graphql --save
+```
+
+```
+import {ApolloClient, createNetworkInterface} from 'react-appllo';
+```

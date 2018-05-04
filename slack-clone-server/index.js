@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { fileLoader, mergeTypes, mergeResolvers} from 'merge-graphql-schemas';
+import cors from 'cors';
 
 import models from './models';
 
@@ -20,9 +21,11 @@ const PORT = 3838;
 const GraphqlEndpoint = '/graphql';
 
 const app = express();
+app.use(cors('localhost:3000'));
 app.use(GraphqlEndpoint, bodyParser.json(), graphqlExpress({ schema, context:{
     models
 } }));
+
 app.use('/graphiql', graphiqlExpress({ endpointURL: GraphqlEndpoint }));
 
 // {force: true}
