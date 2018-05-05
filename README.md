@@ -61,3 +61,8 @@ import {ApolloClient, createNetworkInterface} from 'react-appllo';
 ```
     npm i -S mobx mobx-react
 ```
+
+## Auth
+```
+   npm i -S jsonwebtoken
+```
