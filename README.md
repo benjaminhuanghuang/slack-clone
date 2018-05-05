@@ -53,5 +53,11 @@ import {ApolloClient, createNetworkInterface} from 'react-appllo';
 ```
 
 ## UI Component
-    semantic-ui-react
-    semantic-ui-css
+```    
+    npm i -S  semantic-ui-react semantic-ui-css
+```
+
+## Mobx
+```
+    npm i -S mobx mobx-react
+```
