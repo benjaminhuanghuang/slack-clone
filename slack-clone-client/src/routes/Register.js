@@ -1,5 +1,5 @@
 import React from 'react';
-import { Message, Button, Input, Container, Header } from 'semantic-ui-react';
+import { Form, Message, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -61,18 +61,22 @@ class Register extends React.Component {
         if (passwordError) {
             errorList.push(passwordError);
         }
-
         return (
-            <Container>
+            <Container text>
                 <Header as="h2">Register</Header>
-                <Input name="username" onChange={this.onChange} value={username} placeholder="Username" fluid
-                    error={!!usernameError} />
-                <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid
-                    error={!!emailError} />
-                <Input name="password" onChange={this.onChange} value={password} type="password" placeholder="Password" fluid
-                    error={!!passwordError} />
-                <Button onClick={this.onSubmit}>Submit</Button>
-                {usernameError || emailError || passwordError ? (
+                <Form>
+                    <Form.Field error={!!usernameError} >
+                        <Input name="username" onChange={this.onChange} value={username} placeholder="Username" fluid />
+                    </Form.Field>
+                    <Form.Field error={!!emailError}  >
+                        <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
+                    </Form.Field>
+                    <Form.Field error={!!passwordError} >
+                        <Input name="password" onChange={this.onChange} value={password} type="password" placeholder="Password" fluid />
+                    </Form.Field>
+                    <Button onClick={this.onSubmit}>Submit</Button>
+                </Form>
+                {errorList.length ? (
                     <Message error header="There was some errors with your submission" list={errorList} />
                 ) : null}
             </Container>
