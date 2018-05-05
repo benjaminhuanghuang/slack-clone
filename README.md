@@ -1,6 +1,9 @@
 ## Reference 
     - Slack Clone Using GraphQL and React
         - https://www.youtube.com/playlist?list=PLN3n1USn4xlkdRlq3VZ1sT6SGW0-yajjL
+        - https://github.com/benawad/slack-clone-server/tree/7_register_validation
+        - https://github.com/benawad/slack-clone-client
+
     - https://github.com/sequelize/express-example
 
 
@@ -48,3 +51,7 @@ npm install apollo-boost react-apollo graphql --save
 ```
 import {ApolloClient, createNetworkInterface} from 'react-appllo';
 ```
+
+## UI Component
+    semantic-ui-react
+    semantic-ui-css
