@@ -13,6 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const httpLink = createHttpLink({ uri: 'http://localhost:3333/graphql' });
 
+// Running before graphQL
 const middlewareLink = setContext(() => ({
   headers: {
     'x-token': localStorage.getItem('token'),
@@ -20,6 +21,7 @@ const middlewareLink = setContext(() => ({
   },
 }));
 
+// Running after graphQL, save token
 const afterwareLink = new ApolloLink((operation, forward) => {
   const { headers } = operation.getContext();
 
