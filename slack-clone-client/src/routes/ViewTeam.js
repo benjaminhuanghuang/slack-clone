@@ -15,7 +15,6 @@ export default () => (
         <Teams teams={[{ id: 1, letter: 'B' }, { id: 2, letter: 'Q' }]} />
         <Channels teamName="Team name" userName="User name" channels={[{ id: 1, name: 'general' }, { id: 2, name: 'random' }]}
             users={[{ id: 1, name: 'ben' }, { id: 2, name: 'huang' }]} />
-        <Header>Header</Header>
         <Header channelName="general" />
         <Messages>
             <ul className="message-list">
