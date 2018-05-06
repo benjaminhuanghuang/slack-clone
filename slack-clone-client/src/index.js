@@ -13,7 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 const httpLink = createHttpLink({ uri: 'http://localhost:3333/graphql' });
 
-// Running before graphQL
+// Running before graphQL, pass token to server
 const middlewareLink = setContext(() => ({
   headers: {
     'x-token': localStorage.getItem('token'),
