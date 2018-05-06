@@ -18,7 +18,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "semantic-ui-css": "^2.3.1",
-    "semantic-ui-react": "^0.80.0"
+    "semantic-ui-react": "^0.80.0",
+    "jwt-decode": "^2.2.0"
   },
   "scripts": {
     "start": "PORT=3333 react-scripts start",
