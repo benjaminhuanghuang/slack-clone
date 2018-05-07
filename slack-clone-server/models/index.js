@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 // database, username, password
 const sequelize = new Sequelize('myslack', 'postgres', 'postgres', {
   dialect: 'postgres',
+  operatorsAliases: Sequelize.Op,   // ignore depreciation warning
   define:{
     underscored: true    // conver camel case columns to snake case
   } 

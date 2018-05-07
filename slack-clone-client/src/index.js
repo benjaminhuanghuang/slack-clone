@@ -11,8 +11,8 @@ import decode from 'jwt-decode';
 
 import Routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
-
-const httpLink = createHttpLink({ uri: 'http://localhost:3333/graphql' });
+// Connect to server
+const httpLink = createHttpLink({ uri: 'http://localhost:8888/graphql' });  
 
 // Running before graphQL, pass token to server
 const middlewareLink = setContext(() => ({
