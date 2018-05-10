@@ -42,6 +42,10 @@ Create the previous layout only on viewports under 1024px
     }
 ```
 
+## Grid Layout Module Concepts
+- grid-column-start and grid-column-end: line number in a grid by using the properties
+
+
 ## Dependency
 ```
     npm i -S styled-components
