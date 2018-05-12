@@ -8,14 +8,14 @@ import gql from 'graphql-tag';
 
 
 const AddChannelModal = ({ open, onClose,
-    values, errors, touched, handelChange, handleBlur, handleSubmit, isSubmitting }) => (
+    values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
         <Modal open={open} onClose={onClose}>
             <Modal.Header>Add Channel </Modal.Header>
             <Modal.Content>
                 <Form>
                     <Form.Field>
                         <Input name='name' value={values.name} fluid placeholder="Channel Name"
-                            onChange={handelChange}
+                            onChange={handleChange}
                             onBlur={handleBlur}
                         />
                     </Form.Field>
@@ -37,8 +37,9 @@ export default compose(
     graphql(createChannelMutation),
     withFormik({
         mapPropsToValues: () => ({ name: '' }),
-        handleSubmit: async (values, { props: {onClose, teamId, mutate }, setSubmitting }) => {
+        handleSubmit: async (values, { props: { onClose, teamId, mutate }, setSubmitting }) => {
             const response = await mutate({ variables: { teamId, name: values.name } });
+            console.log(response);
             setSubmitting(false);
             onClose();
         },
