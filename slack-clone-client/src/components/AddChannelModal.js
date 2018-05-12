@@ -1,19 +1,46 @@
 // https://react.semantic-ui.com/modules/modal#modal-example-modal
 
 import React from 'react'
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Form, Button, Header, Modal, Input } from 'semantic-ui-react'
+import { withFormik } from 'formik';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 
-const AddChannelModal = ({ open }) => (
-    <Modal open={open}>
-        <Modal.Header>Select a Photo</Modal.Header>
-        <Modal.Content image>
-            <Modal.Description>
-                <Header>Default Profile Image</Header>
-                <p>We've found the following gravatar image associated with your e-mail address.</p>
-                <p>Is it okay to use this photo?</p>
-            </Modal.Description>
-        </Modal.Content>
-    </Modal>
-)
 
-export default AddChannelModal;
+const AddChannelModal = ({ open, onClose,
+    values, errors, touched, handelChange, handleBlur, handleSubmit, isSubmitting }) => (
+        <Modal open={open} onClose={onClose}>
+            <Modal.Header>Add Channel </Modal.Header>
+            <Modal.Content>
+                <Form>
+                    <Form.Field>
+                        <Input name='name' value={values.name} fluid placeholder="Channel Name"
+                            onChange={handelChange}
+                            onBlur={handleBlur}
+                        />
+                    </Form.Field>
+                    <Form.Group width="equal">
+                        <Button fluid onClick={onClose} disabled={isSubmitting}> Cancel </Button>
+                        <Button fluid disabled={isSubmitting} onClick={handleSubmit}> Create Channel </Button>
+                    </Form.Group>
+                </Form>
+            </Modal.Content>
+        </Modal>
+    )
+const createChannelMutation = gql`
+    mutation($teamId: Int!, $name: String!){
+        createChannel(teamId: $teamId, name :$name)
+    }
+`;
+
+export default compose(
+    graphql(createChannelMutation),
+    withFormik({
+        mapPropsToValues: () => ({ name: '' }),
+        handleSubmit: async (values, { props: {onClose, teamId, mutate }, setSubmitting }) => {
+            const response = await mutate({ variables: { teamId, name: values.name } });
+            setSubmitting(false);
+            onClose();
+        },
+    }),
+)(AddChannelModal);
