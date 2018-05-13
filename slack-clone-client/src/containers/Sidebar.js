@@ -4,10 +4,12 @@ import decode from 'jwt-decode';
 import Channels from '../components/Channels';
 import Teams from '../components/Teams';
 import AddChannelModal from '../components/AddChannelModal';
+import InvitePeopleModal from '../components/InvitePeopleModal';
 
 export default class Sidebar extends React.Component {
     state = {
-        openAddChannelModal: false
+        openAddChannelModal: false,
+        openInvitePeopleModal: false
     }
 
     handleAddChannelClick = () => {
@@ -18,9 +20,18 @@ export default class Sidebar extends React.Component {
         this.setState({ openAddChannelModal: false });
     }
 
+    hadleInvitePeopleClick = () => {
+        this.setState({ openInvitePeopleModal: true });
+    }
+
+    hadleCloseInvitePeopleModal = () => {
+        this.setState({ openInvitePeopleModal: false });
+    }
+
     render() {
         const { teams, team } = this.props;
-        
+        const { openAddChannelModal, openInvitePeopleModal } = this.state;
+
         let username = '';
         try {
             const token = localStorage.getItem('token');
@@ -31,7 +42,7 @@ export default class Sidebar extends React.Component {
 
         return [
             <Teams key="team-sidebar"
-                teams= {teams}
+                teams={teams}
             />,
             <Channels key="channels-sidebar"
                 teamName={team.name}
@@ -40,12 +51,19 @@ export default class Sidebar extends React.Component {
                 channels={team.channels}
                 users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user1' }]}
                 onAddChannelClick={this.handleAddChannelClick}
+                onInvitePeopleClick={this.hadleInvitePeopleClick}
             />,
             <AddChannelModal
                 teamId={team.id}
                 onClose={this.handleCloseChannelModal}
-                open={this.state.openAddChannelModal}
+                open={openAddChannelModal}
                 key="sidebar-add-channel-model"
+            />,
+            <InvitePeoplelModal
+                teamId={team.id}
+                onClose={this.handleCloseInvitePeopleModal}
+                open={openInvitePeopleModal}
+                key="sidebar-invite-people-model"
             />
         ];
     };
