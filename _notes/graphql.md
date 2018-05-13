@@ -15,4 +15,7 @@
 - graphql contains Facebook’s reference implementation of GraphQL - Apollo Client uses some of its functionality as well.
 
 
-## Server side
+## Server side key concepts
+- shcema
+- reslove
+- models

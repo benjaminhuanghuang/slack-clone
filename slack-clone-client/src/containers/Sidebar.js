@@ -8,6 +8,8 @@ import Channels from '../components/Channels';
 import Teams from '../components/Teams';
 import AddChannelModal from '../components/AddChannelModal';
 
+import { allTeamQuery } from '../graphql/team';
+
 class Sidebar extends React.Component {
     state = {
         openAddChannelModal: false
@@ -52,7 +54,7 @@ class Sidebar extends React.Component {
                 onAddChannelClick={this.handleAddChannelClick}
             />,
             <AddChannelModal
-                teamId={currentTeamId}
+                teamId={team.id}
                 onClose={this.handleCloseChannelModal}
                 open={this.state.openAddChannelModal}
                 key="sidebar-add-channel-model"
@@ -60,17 +62,6 @@ class Sidebar extends React.Component {
         ];
     };
 }
-const allTeamsQuery = gql`
-  {
-    allTeams {
-      id
-      name
-      channels {
-        id
-        name
-      }
-    }
-  }
-`;
 
-export default graphql(allTeamsQuery)(Sidebar);
+
+export default graphql(allTeamQuery)(Sidebar);
