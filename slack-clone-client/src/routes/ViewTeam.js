@@ -38,14 +38,14 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
                 letter: t.name.charAt(0).toUpperCase(),
             }))}
             team={team} />
-        <Header channelName={channel.name} />
-        <Messages channelId={channel.id}>
+        {channel && <Header channelName={channel.name} />}
+        {channel && <Messages channelId={channel.id}>
             <ul className="message-list">
                 <li />
                 <li />
             </ul>
-        </Messages>
-        <SendMessage channelName="general" />
+        </Messages>}
+        {channel && <SendMessage channelName={channel.name} channelId={channel.id} />}
     </AppLayout>
 };
 
