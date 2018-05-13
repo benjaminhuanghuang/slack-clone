@@ -19,3 +19,6 @@
 - shcema
 - reslove
 - models
+
+
+## Write sql in reslove
