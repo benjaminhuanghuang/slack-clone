@@ -22,16 +22,14 @@ const isAuthenticated = () => {
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            (isAuthenticated() ? (
-                <Component {...props} />
-            ) : (
-                    <Redirect
-                        to={{ pathname: '/login' }}
-                    />
-                ))}
+    <Route {...rest} render={props =>
+        (isAuthenticated() ? (
+            <Component {...props} />
+        ) : (
+                <Redirect
+                    to={{ pathname: '/login' }}
+                />
+            ))}
     />
 );
 
