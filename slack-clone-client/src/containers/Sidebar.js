@@ -59,7 +59,7 @@ export default class Sidebar extends React.Component {
                 open={openAddChannelModal}
                 key="sidebar-add-channel-model"
             />,
-            <InvitePeoplelModal
+            <InvitePeopleModal
                 teamId={team.id}
                 onClose={this.handleCloseInvitePeopleModal}
                 open={openInvitePeopleModal}

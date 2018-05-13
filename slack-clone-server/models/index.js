@@ -12,7 +12,7 @@ const sequelize = new Sequelize('myslack', 'postgres', 'postgres', {
 const models = {
   User: sequelize.import('./user'),
   Channel: sequelize.import('./channel'),
-  // member: sequelize.import('./member'),
+  Member: sequelize.import('./member'),
   Message: sequelize.import('./message'),
   Team: sequelize.import('./team')
 }

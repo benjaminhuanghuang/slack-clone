@@ -65,7 +65,7 @@ app.use(
 );
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: graphqlEndpoint }));
-
-models.sequelize.sync({}).then(() => {
+// force: true will drop and recreat database
+models.sequelize.sync({ }).then(() => {
   app.listen(8888);
 });
