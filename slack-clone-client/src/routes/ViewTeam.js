@@ -14,38 +14,39 @@ import Sidebar from '../containers/Sidebar';
 
 import { allTeamQuery } from '../graphql/team';
 
-const ViewTeam = ({ data: { loading, allTeams }, match: { params: { teamId, channelId } } }) => {
+const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: { teamId, channelId } } }) => {
     console.log(allTeams, loading)
     if (loading)
         return null;
+
+    const teams = [...allTeams, ...inviteTeams];
     if (!allTeams.length) {
-        return (<Redirect to="/create-team"/>);
+        return (<Redirect to="/create-team" />);
     }
     const teamIdInteger = parseInt(teamId, 10);
-
     const teamIdx = teamIdInteger ? findIndex(allTeams, ['id', teamIdInteger]) : 0;
-    const team = allTeams[teamIdx];
+    const team = teamIdx === -1 ? allTeams[0] : allTeams[teamIdx];
 
     const channelIdInteger = parseInt(channelId, 10);
     const channelIdx = channelIdInteger ? findIndex(team.channels, ['id', channelIdInteger]) : 0;
-    const channel = team.channels[channelIdx];
+    const channel = channelIdx === -1 ? team.channels[0] : team.channels[channelIdx];
 
     <AppLayout>
-                <Sidebar
-                    teams={allTeams.map(t => ({
-                        id: t.id,
-                        letter: t.name.charAt(0).toUpperCase(),
-                    }))}
-                    team={team} />
-                <Header channelName={channel.name} />
-                <Messages channelId={channel.id}>
-                    <ul className="message-list">
-                        <li />
-                        <li />
-                    </ul>
-                </Messages>
-                <SendMessage channelName="general" />
-            </AppLayout>
-            };
-            
+        <Sidebar
+            teams={allTeams.map(t => ({
+                id: t.id,
+                letter: t.name.charAt(0).toUpperCase(),
+            }))}
+            team={team} />
+        <Header channelName={channel.name} />
+        <Messages channelId={channel.id}>
+            <ul className="message-list">
+                <li />
+                <li />
+            </ul>
+        </Messages>
+        <SendMessage channelName="general" />
+    </AppLayout>
+};
+
 export default graphql(allTeamQuery)(ViewTeam);
