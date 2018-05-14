@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Input } from 'semantic-ui-react';
 import { withFormik } from 'formik';
 import gql from 'graphql-tag';
-import { compose, graphql } from 'reach-apollo';
+import { compose, graphql } from 'react-apollo';
 
 const SendMessageWrapper = styled.div`
   grid-column: 3;
@@ -18,7 +18,7 @@ const SendMessage = ({
     values, handleChange, handleBlur, handleSubmit, isSubmitting
 }) => (
         <SendMessageWrapper>
-            <Input name='message' value={value.message} fluid placeholder={`Message #${channelName}`}
+            <Input name='message' value={values.message} fluid placeholder={`Message #${channelName}`}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onKeyDown={(e) => {
