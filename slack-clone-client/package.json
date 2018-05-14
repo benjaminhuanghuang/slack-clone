@@ -8,8 +8,11 @@
     "apollo-link": "^1.2.2",
     "apollo-link-context": "^1.0.8",
     "apollo-link-http": "^1.5.4",
+    "apollo-link-ws": "^1.0.8",
+    "apollo-utilities": "^1.0.12",
     "formik": "^0.11.11",
     "graphql": "^0.13.2",
+    "graphql-subscriptions": "^0.5.8",
     "graphql-tag": "^2.9.2",
     "jwt-decode": "^2.2.0",
     "mobx": "^4.2.1",
@@ -21,7 +24,8 @@
     "react-scripts": "1.1.4",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.80.0",
-    "styled-components": "^3.2.6"
+    "styled-components": "^3.2.6",
+    "subscriptions-transport-ws": "^0.9.9"
   },
   "scripts": {
     "start": "PORT=3333 react-scripts start",
