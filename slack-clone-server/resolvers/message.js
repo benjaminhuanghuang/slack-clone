@@ -2,9 +2,15 @@ import formatErrors from '../formatErrors';
 import requiresAuth from '../permissions';
 
 export default {
+    Message: {
+        user: ({ userId }, args, { models }) =>
+            models.User.findOne({ where: { id: userId } }, { raw: true }),
+    },
     Query: {
         message: requiresAuth.createResolver(async (parent, { channelId }, { models }) => {
-            messages = await models.Message.findAll({ where: { channeldId } }, { raw: true });
+            messages = await models.Message.findAll(
+                { order: [['create_at', 'ASC']], where: { channeldId } },
+                { raw: true });
             return messages;
         })
     },
@@ -17,8 +23,5 @@ export default {
                 return false;
             }
         })
-    },
-    Message: {
-        user: ({ userId }, args, { models }) => models.User.findOne({ where: { id: userId } }),
-    },
+    }
 };

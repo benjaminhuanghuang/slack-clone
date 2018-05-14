@@ -1,8 +1,14 @@
+import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
+
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import path from 'path';
+import { createServer } from 'http';
+import { execute, subscribe } from 'graphql';
+import { PubSub } from 'graphql-subscriptions';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
@@ -65,7 +71,18 @@ app.use(
 );
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: graphqlEndpoint }));
+const server = createServer(app);
+const PORT = 8888;
 // force: true will drop and recreat database
-models.sequelize.sync({ }).then(() => {
-  app.listen(8888);
+models.sequelize.sync({}).then(() => {
+  server.listen(PORT, () => {
+    new SubscriptionServer({
+      execute,
+      subscribe,
+      schema,
+    }, {
+        server: server,
+        path: '/subscriptions',
+      });
+  });
 });

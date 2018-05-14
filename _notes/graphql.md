@@ -23,3 +23,10 @@
 
 ## Write sql in reslove
  
+
+## GraphQL Subscrition
+### Server side
+- https://www.apollographql.com/docs/graphql-subscriptions/express.
+```
+npm i subscriptions-transport-ws graphql-subscriptions -S
+```
