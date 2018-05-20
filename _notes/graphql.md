@@ -30,5 +30,7 @@
 ```
 npm i subscriptions-transport-ws graphql-subscriptions -S
 ```
+
+
 ### Client side
 - https://www.apollographql.com/docs/react/advanced/subscriptions.html

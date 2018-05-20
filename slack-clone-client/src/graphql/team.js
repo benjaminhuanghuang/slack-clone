@@ -6,6 +6,11 @@ export const allTeamQuery = gql`
     id
     owner
     name
+    admin
+    directMessageMembers{
+      id
+      username
+    }
     channels {
       id
       name

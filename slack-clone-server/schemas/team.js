@@ -3,6 +3,7 @@ export default `
     id: Int!
     name: String!
     owner: Int!
+    directMessageMember:[User!]!
     members: [User!]!
     channels: [Channel!]!
   }
