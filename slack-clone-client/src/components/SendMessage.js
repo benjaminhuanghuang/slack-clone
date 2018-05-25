@@ -14,20 +14,25 @@ const ENTER_KEY = 13;
 
 // Send message component
 const SendMessage = ({
-    channelName,
-    values, handleChange, handleBlur, handleSubmit, isSubmitting
+  channelName,
+  values, handleChange, handleBlur, handleSubmit, isSubmitting,
 }) => (
-        <SendMessageWrapper>
-            <Input name='message' value={values.message} fluid placeholder={`Message #${channelName}`}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onKeyDown={(e) => {
-                    if (e.keyCode === ENTER_KEY && !isSubmitting) {
-                        handleSubmit();
-                    }
-                }} />
-        </SendMessageWrapper>
-    );
+  <SendMessageWrapper>
+    <Input
+      name="message"
+      value={values.message}
+      fluid
+      placeholder={`Message #${channelName}`}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onKeyDown={(e) => {
+        if (e.keyCode === ENTER_KEY && !isSubmitting) {
+          handleSubmit();
+        }
+      }}
+    />
+  </SendMessageWrapper>
+);
 
 const createMessageMutation = gql`
    mutation($channelId: Int!, $text: String!){
@@ -36,19 +41,20 @@ const createMessageMutation = gql`
 `;
 
 export default compose(
-    graphql(createMessageMutation),
-    withFormik({
-        mapPropsToValues: () => ({ message: '' }),
-        handleSubmit: async (values, { props: { channelId, mutate }, setSubmitting, resetForm }) => {
-            if (!values.message || !values.message.trim()) {
-                setSubmitting(false);
-                return;
-            }
+  graphql(createMessageMutation),
+  withFormik({
+    mapPropsToValues: () => ({ message: '' }),
+    handleSubmit: async (values, { props: { channelId, mutate }, setSubmitting, resetForm }) => {
+      if (!values.message || !values.message.trim()) {
+        setSubmitting(false);
+        return;
+      }
 
-            const response = await mutate({
-                variables: { channelId, text: values.message },
-            });
-            console.log(response);
-            resetForm(false);
-        },
-    }))(SendMessage);
+      const response = await mutate({
+        variables: { channelId, text: values.message },
+      });
+      console.log(response);
+      resetForm(false);
+    },
+  }),
+)(SendMessage);

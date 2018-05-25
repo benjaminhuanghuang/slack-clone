@@ -52,31 +52,35 @@ const user = ({ id, name }) => (
 );
 
 export default ({
-  teamName, username, channels, users, onAddChannelClick, teamId, onInvitePeopleClick, isOwner
+  teamName, username, channels, users, onAddChannelClick, teamId, onInvitePeopleClick, isOwner,
 }) => (
-    <ChannelWrapper>
-      <PushLeft>
-        <TeamNameHeader>{teamName}</TeamNameHeader>
-        {username}
-      </PushLeft>
+  <ChannelWrapper>
+    <PushLeft>
+      <TeamNameHeader>{teamName}</TeamNameHeader>
+      {username}
+    </PushLeft>
+    <div>
+      <SideBarList>
+        <SideBarListHeader>
+          Channels {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}
+        </SideBarListHeader>
+        {channels.map(c => channel(c, teamId))}
+      </SideBarList>
+    </div>
+    <div>
+      <SideBarList>
+        <SideBarListHeader>Direct Messages</SideBarListHeader>
+        {users.map(user)}
+      </SideBarList>
+    </div>
+    {isOwner &&
       <div>
-        <SideBarList>
-          <SideBarListHeader>
-            Channels {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}
-          </SideBarListHeader>
-          {channels.map((c) => channel(c, teamId))}
-        </SideBarList>
-      </div>
-      <div>
-        <SideBarList>
-          <SideBarListHeader>Direct Messages</SideBarListHeader>
-          {users.map(user)}
-        </SideBarList>
-      </div>
-      {isOwner && <div>
-        <a href="#invite-people" onclick={onInvitePeopleClick}>
+        <a
+          href="#invite-people"
+          onClick={onInvitePeopleClick}
+        >
           + Invite People
         </a>
       </div>}
-    </ChannelWrapper>
-  );
+  </ChannelWrapper>
+);
